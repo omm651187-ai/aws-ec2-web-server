@@ -37,7 +37,7 @@ resource "aws_route_table_association" "rta" {
 # 5. Security Group (HTTP & SSH)
 resource "aws_security_group" "web_sg" {
   name        = "web_server_sg"
-  description = "Allow HTTP and SSH"
+  description = "Allow SSH from my IP and HTTP from anywhere"
   vpc_id      = aws_vpc.web_vpc.id
 
   ingress {
@@ -51,7 +51,7 @@ resource "aws_security_group" "web_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.4/32"]
   }
 
   egress {
